@@ -32,14 +32,15 @@ public class SlotsPage : BaseLayout
         if (string.IsNullOrWhiteSpace(name)) name = "";
 
         string? targetAuthor = null;
+        string? slotHash = null;
+        int? slotId = null;
         GameVersion? targetGame = null;
         StringBuilder finalSearch = new();
         foreach (string part in name.Split(" "))
         {
-            if (part.Contains("by:"))
-            {
-                targetAuthor = part.Replace("by:", "");
-            }
+            if (part.Contains("by:")) targetAuthor = part.Replace("by:", "");
+            if (part.Contains("hash:")) slotHash = part.Replace("hash:", "");
+            if (part.Contains("id:")) slotId = Int32.Parse(part.Replace("id:", ""));
             else if (part.Contains("game:"))
             {
                 if (part.Contains('1')) targetGame = GameVersion.LittleBigPlanet1;
@@ -62,7 +63,9 @@ public class SlotsPage : BaseLayout
             .Where(p => p.Name.Contains(trimmedSearch))
             .Where(p => p.Creator != null && (targetAuthor == null || string.Equals(p.Creator.Username.ToLower(), targetAuthor.ToLower())))
             .Where(p => p.Creator != null && (!p.SubLevel || p.Creator == this.User))
-            .Where(p => targetGame == null || p.GameVersion == targetGame);
+            .Where(p => targetGame == null || p.GameVersion == targetGame)
+            .Where(p => slotHash == null || p.RootLevel == slotHash)
+            .Where(p => slotId == null || p.SlotId == slotId);
 
         this.SlotCount = await slots.CountAsync();
 
