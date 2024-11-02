@@ -83,8 +83,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
-      gameserver:
-        condition: service_healthy
     volumes:
       - "./data:/lighthouse/data:z"
       - "./data/.aspnet:/lighthouse/.aspnet:z"
