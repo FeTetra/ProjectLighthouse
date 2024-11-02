@@ -44,6 +44,7 @@ public class DebugWarmupLifetime : IHostLifetime
             ServerType.GameServer => ServerConfiguration.Instance.GameApiListenUrl,
             ServerType.Website => ServerConfiguration.Instance.WebsiteListenUrl,
             ServerType.Api => ServerConfiguration.Instance.ApiListenUrl,
+            ServerType.Presence => ServerConfiguration.Instance.PresenceListenUrl,
             _ => throw new ArgumentOutOfRangeException(),
         };
 
