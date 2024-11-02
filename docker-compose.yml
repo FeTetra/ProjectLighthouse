@@ -67,6 +67,27 @@ services:
     volumes:
       - "./data:/lighthouse/data:z"
       - "./data/.aspnet:/lighthouse/.aspnet:z"
+  presence:
+    image: lighthouse:latest
+    container_name: presence
+    restart: unless-stopped
+    ports:
+      - "10072:10072"
+    environment:
+      SERVER: Presence
+    healthcheck:
+      test: wget --spider -t1 -nv http://localhost:10072/status || exit 1
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    depends_on:
+      db:
+        condition: service_healthy
+      gameserver:
+        condition: service_healthy
+    volumes:
+      - "./data:/lighthouse/data:z"
+      - "./data/.aspnet:/lighthouse/.aspnet:z"
   db:
     image: mariadb:latest
     container_name: db
