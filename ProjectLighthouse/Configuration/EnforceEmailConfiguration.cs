@@ -13,10 +13,10 @@ public class EnforceEmailConfiguration : ConfigurationBase<EnforceEmailConfigura
 
     public override bool NeedsConfiguration { get; set; } = false;
 
-    public static bool EmailEnforcementEnabled = false;
+    public bool EmailEnforcementEnabled = false;
 
     // No blacklist by default, add path to blacklist
-    private static string BlacklistFilePath = Path.GetFullPath("");
+    public static string BlacklistFilePath = "";
 
     public static readonly HashSet<string> BlackListedDomains = new(File.ReadAllLines(BlacklistFilePath));
 
