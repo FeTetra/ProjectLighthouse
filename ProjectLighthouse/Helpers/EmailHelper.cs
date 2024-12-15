@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using LBPUnion.ProjectLighthouse.Configuration;
@@ -68,6 +70,31 @@ public static class SMTPHelper
 
         recentlySentMail.TryAdd(user.UserId, TimeHelper.TimestampMillis + emailCooldown);
     }
+    
+    // Compile checks to determine email validity
+    public static bool IsValidEmail(DatabaseContext database, string email)
+    {
+        if (!string.IsNullOrWhiteSpace(email) && new EmailAddressAttribute().IsValid(email) && !EmailIsUsed(database, email).Result)
+        {
+            // Get domain after '@' character
+            string domain = email.Split('@')[1];
+
+            if (EnforceEmailConfiguration.EmailEnforcementEnabled) return !DomainIsInBlacklist(domain);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    // Check if email is already in use by an account
+    private static async Task<bool> EmailIsUsed(DatabaseContext database, string email)
+    {
+        return await database.Users.AnyAsync(u => u.EmailAddress != null && u.EmailAddress.ToLower() == email.ToLower());
+    }
+
+    //
+    private static bool DomainIsInBlacklist(string domain) => EnforceEmailConfiguration.BlackListedDomains.Contains(domain);
 
     public static void SendRegistrationEmail(IMailService mail, UserEntity user)
     {

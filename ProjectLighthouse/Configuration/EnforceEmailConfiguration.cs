@@ -1,3 +1,6 @@
+#nullable enable
+using System.Collections.Generic;
+using System.IO;
 using YamlDotNet.Serialization;
 
 namespace LBPUnion.ProjectLighthouse.Configuration;
@@ -10,7 +13,12 @@ public class EnforceEmailConfiguration : ConfigurationBase<EnforceEmailConfigura
 
     public override bool NeedsConfiguration { get; set; } = false;
 
-    public bool EmailEnforcementEnabled = false;
+    public static readonly bool EmailEnforcementEnabled = false;
+
+    // No blacklist by default, add path to blacklist
+    private static string BlacklistFilePath = Path.GetFullPath("");
+
+    public static readonly HashSet<string> BlackListedDomains = new(File.ReadAllLines(BlacklistFilePath));
 
     public override ConfigurationBase<EnforceEmailConfiguration> Deserialize
         (IDeserializer deserializer, string text) =>
