@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using LBPUnion.ProjectLighthouse.Configuration;
+using LBPUnion.ProjectLighthouse.Configuration; 
 using LBPUnion.ProjectLighthouse.Database;
 using LBPUnion.ProjectLighthouse.Extensions;
 using LBPUnion.ProjectLighthouse.Types.Entities.Profile;
@@ -22,6 +22,8 @@ public static class SMTPHelper
     private static readonly ConcurrentDictionary<int, long> recentlySentMail = new();
 
     private const long emailCooldown = 1000 * 30;
+
+    public static readonly HashSet<string> BlackListedDomains = new(File.ReadAllLines(EnforceEmailConfiguration.Instance.BlacklistFilePath));
 
     private static bool CanSendMail(UserEntity user)
     {
@@ -79,7 +81,7 @@ public static class SMTPHelper
             // Get domain after '@' character
             string domain = email.Split('@')[1];
 
-            if (EnforceEmailConfiguration.EmailEnforcementEnabled) return !DomainIsInBlacklist(domain);
+            if (EnforceEmailConfiguration.Instance.EmailEnforcementEnabled) return !DomainIsInBlacklist(domain);
 
             return true;
         }
@@ -93,8 +95,8 @@ public static class SMTPHelper
         return await database.Users.AnyAsync(u => u.EmailAddress != null && u.EmailAddress.ToLower() == email.ToLower());
     }
 
-    //
-    private static bool DomainIsInBlacklist(string domain) => EnforceEmailConfiguration.BlackListedDomains.Contains(domain);
+    // 
+    private static bool DomainIsInBlacklist(string domain) => BlackListedDomains.Contains(domain);
 
     public static void SendRegistrationEmail(IMailService mail, UserEntity user)
     {
