@@ -22,8 +22,13 @@ public static class SMTPHelper
     private static readonly ConcurrentDictionary<int, long> recentlySentMail = new();
 
     private const long emailCooldown = 1000 * 30;
+    
+    // To prevent ReadAllLines() exception when BlacklistFilePath is empty
+    private static readonly string[] blacklistFile =
+        !string.IsNullOrWhiteSpace(EnforceEmailConfiguration.Instance.BlacklistFilePath)
+            ? File.ReadAllLines(EnforceEmailConfiguration.Instance.BlacklistFilePath) : [];
 
-    public static readonly HashSet<string> BlackListedDomains = new(File.ReadAllLines(EnforceEmailConfiguration.Instance.BlacklistFilePath));
+    private static readonly HashSet<string> blacklistedDomains = new(blacklistFile);
 
     private static bool CanSendMail(UserEntity user)
     {
@@ -73,15 +78,17 @@ public static class SMTPHelper
         recentlySentMail.TryAdd(user.UserId, TimeHelper.TimestampMillis + emailCooldown);
     }
     
-    // Compile checks to determine email validity
+    // Accumulate checks to determine email validity
     public static bool IsValidEmail(DatabaseContext database, string email)
     {
+        // Email should not be empty, should be an actual email, and shouldn't already be used by an account
         if (!string.IsNullOrWhiteSpace(email) && new EmailAddressAttribute().IsValid(email) && !EmailIsUsed(database, email).Result)
         {
             // Get domain after '@' character
             string domain = email.Split('@')[1];
 
-            if (EnforceEmailConfiguration.Instance.EmailEnforcementEnabled) return !DomainIsInBlacklist(domain);
+            // Don't even bother if there are no domains in blacklist (AKA file path is empty/invalid, or file itself is empty)
+            if (EnforceEmailConfiguration.Instance.EnableEmailBlacklist && blacklistedDomains.Count > 0) return !DomainIsInBlacklist(domain);
 
             return true;
         }
@@ -95,8 +102,8 @@ public static class SMTPHelper
         return await database.Users.AnyAsync(u => u.EmailAddress != null && u.EmailAddress.ToLower() == email.ToLower());
     }
 
-    // 
-    private static bool DomainIsInBlacklist(string domain) => BlackListedDomains.Contains(domain);
+    // Check if domain blacklist contains input domain
+    private static bool DomainIsInBlacklist(string domain) => blacklistedDomains.Contains(domain);
 
     public static void SendRegistrationEmail(IMailService mail, UserEntity user)
     {

@@ -13,7 +13,8 @@ public class EnforceEmailConfiguration : ConfigurationBase<EnforceEmailConfigura
 
     public override bool NeedsConfiguration { get; set; } = false;
 
-    public bool EmailEnforcementEnabled { get; set; } = false;
+    public bool EnableEmailEnforcement { get; set; } = false;
+    public bool EnableEmailBlacklist { get; set; } = false;
 
     // No blacklist by default, add path to blacklist
     public string BlacklistFilePath { get; set; } = "";
