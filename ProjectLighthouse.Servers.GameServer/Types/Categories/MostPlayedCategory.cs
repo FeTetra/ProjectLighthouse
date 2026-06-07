@@ -1,15 +1,19 @@
 #nullable enable
 using LBPUnion.ProjectLighthouse.Database;
 using LBPUnion.ProjectLighthouse.Filter;
+using LBPUnion.ProjectLighthouse.Localization;
+using LBPUnion.ProjectLighthouse.Localization.StringLists;
 using LBPUnion.ProjectLighthouse.Types.Entities.Level;
 using LBPUnion.ProjectLighthouse.Types.Entities.Token;
 
 namespace LBPUnion.ProjectLighthouse.Servers.GameServer.Types.Categories;
 
-public class MostPlayedCategory : SlotCategory
+public class MostPlayedCategory : TranslatableSlotCategory
 {
     public override string Name { get; set; } = "Most Played";
     public override string Description { get; set; } = "The most played content";
+    public override TranslatableString LocalizedName { get; set; } = CategoryStrings.MostPlayedName;
+    public override TranslatableString LocalizedDescription { get; set; } = CategoryStrings.MostPlayedDesc;
     public override string IconHash { get; set; } = "g820608";
     public override string Endpoint { get; set; } = "most_played";
     public override string Tag => "most_played";

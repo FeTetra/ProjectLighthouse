@@ -39,6 +39,19 @@ public class GameCategory : ILbpSerializable
     [XmlElement("results")]
     public GenericSerializableList? Results { get; set; }
 
+    public static GameCategory CreateFromEntity(Category category, GenericSerializableList? results, string language) =>
+        new()
+        {
+            Name = category.ResolveName(language),
+            Description = category.ResolveDescription(language),
+            Icon = category.IconHash,
+            Url = category.IngameEndpoint,
+            Sorts = category.Sorts,
+            Types = category.Types,
+            Tag = category.Tag,
+            Results = results,
+        };
+
     public static GameCategory CreateFromEntity(Category category, GenericSerializableList? results) =>
         new()
         {

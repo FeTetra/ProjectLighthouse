@@ -5,6 +5,7 @@ using LBPUnion.ProjectLighthouse.Filter.Sorts;
 using LBPUnion.ProjectLighthouse.Logging;
 using LBPUnion.ProjectLighthouse.Servers.GameServer.Extensions;
 using LBPUnion.ProjectLighthouse.Servers.GameServer.Types.Categories;
+using LBPUnion.ProjectLighthouse.Servers.GameServer.Helpers;
 using LBPUnion.ProjectLighthouse.Types.Entities.Level;
 using LBPUnion.ProjectLighthouse.Types.Entities.Profile;
 using LBPUnion.ProjectLighthouse.Types.Entities.Token;
@@ -43,7 +44,7 @@ public class CategoryController : ControllerBase
 
         PaginationData pageData = this.Request.GetPaginationData();
 
-        pageData.TotalElements = CategoryHelper.Categories.Count(c => !string.IsNullOrWhiteSpace(c.Name));
+        pageData.TotalElements = CategoryHelper.Categories.Count();
 
         if (!int.TryParse(this.Request.Query["num_categories_with_results"], out int results)) results = 5;
 
@@ -51,13 +52,17 @@ public class CategoryController : ControllerBase
 
         SlotQueryBuilder queryBuilder = this.FilterFromRequest(token);
 
-        foreach (Category category in CategoryHelper.Categories.Where(c => !string.IsNullOrWhiteSpace(c.Name))
+        string locale = this.Request.Query["language"].ToString();
+        string language = TranslationHelper.MapLBPLocaleCode(this.Request.Query["language"].ToString());
+        Console.WriteLine($@"Got locale code '{locale}', mapped to '{language}'");
+
+        foreach (Category category in CategoryHelper.Categories
                      .Skip(Math.Max(0, pageData.PageStart - 1))
                      .Take(Math.Min(pageData.PageSize, pageData.MaxElements))
                      .ToList())
         {
             int numResults = results > 0 ? 1 : 0;
-            categories.Add(await category.Serialize(this.database, token, queryBuilder, numResults));
+            categories.Add(await category.Serialize(this.database, token, queryBuilder, language, numResults));
             results--;
         }
 

@@ -1,15 +1,19 @@
 #nullable enable
 using LBPUnion.ProjectLighthouse.Database;
 using LBPUnion.ProjectLighthouse.Filter;
+using LBPUnion.ProjectLighthouse.Localization;
+using LBPUnion.ProjectLighthouse.Localization.StringLists;
 using LBPUnion.ProjectLighthouse.Types.Entities.Level;
 using LBPUnion.ProjectLighthouse.Types.Entities.Token;
 
 namespace LBPUnion.ProjectLighthouse.Servers.GameServer.Types.Categories;
 
-public class HeartedCategory : SlotCategory
+public class HeartedCategory : TranslatableSlotCategory
 {
     public override string Name { get; set; } = "My Hearted Content";
     public override string Description { get; set; } = "Content you've hearted";
+    public override TranslatableString LocalizedName { get; set; } = CategoryStrings.HeartedName;
+    public override TranslatableString LocalizedDescription { get; set; } = CategoryStrings.HeartedDesc;
     public override string IconHash { get; set; } = "g820611";
     public override string Endpoint { get; set; } = "hearted_levels";
     public override string Tag => "my_hearted_levels";

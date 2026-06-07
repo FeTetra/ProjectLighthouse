@@ -14,4 +14,5 @@ public enum TranslationAreas
     TwoFactor,
     Moderation,
     Privacy,
+    Categories,
 }

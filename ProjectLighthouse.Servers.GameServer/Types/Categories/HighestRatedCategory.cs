@@ -1,16 +1,20 @@
 #nullable enable
 using LBPUnion.ProjectLighthouse.Database;
 using LBPUnion.ProjectLighthouse.Filter;
+using LBPUnion.ProjectLighthouse.Localization;
+using LBPUnion.ProjectLighthouse.Localization.StringLists;
 using LBPUnion.ProjectLighthouse.Types.Entities.Level;
 using LBPUnion.ProjectLighthouse.Types.Entities.Token;
 using LBPUnion.ProjectLighthouse.Types.Misc;
 
 namespace LBPUnion.ProjectLighthouse.Servers.GameServer.Types.Categories;
 
-public class HighestRatedCategory : SlotCategory
+public class HighestRatedCategory : TranslatableSlotCategory
 {
     public override string Name { get; set; } = "Highest Rated";
     public override string Description { get; set; } = "Community Highest Rated content";
+    public override TranslatableString LocalizedName { get; set; } = CategoryStrings.HighestRatedName;
+    public override TranslatableString LocalizedDescription { get; set; } = CategoryStrings.HighestRatedDesc;
     public override string IconHash { get; set; } = "g820603";
     public override string Endpoint { get; set; } = "thumbs";
     public override string Tag => "highest_rated";

@@ -15,13 +15,14 @@ public abstract class SlotCategory : Category
 
     public abstract IQueryable<SlotEntity> GetItems(DatabaseContext database, GameTokenEntity token, SlotQueryBuilder queryBuilder);
 
-    public override async Task<GameCategory> Serialize(DatabaseContext database, GameTokenEntity token, SlotQueryBuilder queryBuilder, int numResults = 1)
+    public override async Task<GameCategory> Serialize(
+        DatabaseContext database, GameTokenEntity token, SlotQueryBuilder queryBuilder, string language, int numResults = 1)
     {
         List<ILbpSerializable> slots =
             (await this.GetItems(database, token, queryBuilder).Take(numResults).ToListAsync())
             .ToSerializableList<SlotEntity, ILbpSerializable>(s => SlotBase.CreateFromEntity(s, token));
 
         int totalSlots = await this.GetItems(database, token, queryBuilder).CountAsync();
-        return GameCategory.CreateFromEntity(this, new GenericSerializableList(slots, totalSlots, numResults+1));
+        return GameCategory.CreateFromEntity(this, new GenericSerializableList(slots, totalSlots, numResults+1), language);
     }
 }

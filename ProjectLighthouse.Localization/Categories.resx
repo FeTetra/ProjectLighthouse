@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="team_picks_name" xml:space="preserve">
+        <value>Team Picks</value>
+    </data>
+    <data name="most_hearted_name" xml:space="preserve">
+        <value>Most Hearted</value>
+    </data>
+    <data name="newest_levels_name" xml:space="preserve">
+        <value>Newest Levels</value>
+    </data>
+    <data name="most_played_name" xml:space="preserve">
+        <value>Most Played</value>
+    </data>
+    <data name="highest_rated_name" xml:space="preserve">
+        <value>Highest Rated</value>
+    </data>
+    <data name="my_hearted_creators_name" xml:space="preserve">
+        <value>My Hearted Creators</value>
+    </data>
+    <data name="my_playlists_name" xml:space="preserve">
+        <value>My Playlists</value>
+    </data>
+    <data name="queue_name" xml:space="preserve">
+        <value>My Queue</value>
+    </data>
+    <data name="hearted_name" xml:space="preserve">
+        <value>My Hearted Content</value>
+    </data>
+    <data name="lucky_dip_name" xml:space="preserve">
+        <value>Lucky Dip</value>
+    </data>
+
+    <data name="team_picks_desc" xml:space="preserve">
+        <value>Community team picks</value>
+    </data>
+    <data name="most_hearted_desc" xml:space="preserve">
+        <value>The most hearted content</value>
+    </data>
+    <data name="newest_levels_desc" xml:space="preserve">
+        <value>The most recently published content</value>
+    </data>
+    <data name="most_played_desc" xml:space="preserve">
+        <value>The most played content</value>
+    </data>
+    <data name="highest_rated_desc" xml:space="preserve">
+        <!--This may not be the correct base translatable string, this has been guessed for now-->
+        <value>The most loved content</value>
+    </data>
+    <data name="my_hearted_creators_desc" xml:space="preserve">
+        <value>Your favorite Creators</value>
+    </data>
+    <data name="my_playlists_desc" xml:space="preserve">
+        <value>Your Playlists</value>
+    </data>
+    <data name="queue_desc" xml:space="preserve">
+        <value>Your queued content</value>
+    </data>
+    <data name="hearted_desc" xml:space="preserve">
+        <value>Content you've hearted</value>
+    </data>
+    <data name="lucky_dip_desc" xml:space="preserve">
+        <value>A random selection of content</value>
+    </data>
+</root>

@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using LBPUnion.ProjectLighthouse.Localization;
 
 namespace LBPUnion.ProjectLighthouse.Types.Entities.Level;
 

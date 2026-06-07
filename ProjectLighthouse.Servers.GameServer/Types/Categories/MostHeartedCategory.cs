@@ -3,16 +3,20 @@ using LBPUnion.ProjectLighthouse.Database;
 using LBPUnion.ProjectLighthouse.Extensions;
 using LBPUnion.ProjectLighthouse.Filter;
 using LBPUnion.ProjectLighthouse.Filter.Sorts.Metadata;
+using LBPUnion.ProjectLighthouse.Localization;
+using LBPUnion.ProjectLighthouse.Localization.StringLists;
 using LBPUnion.ProjectLighthouse.Types.Entities.Level;
 using LBPUnion.ProjectLighthouse.Types.Entities.Token;
 using LBPUnion.ProjectLighthouse.Types.Misc;
 
 namespace LBPUnion.ProjectLighthouse.Servers.GameServer.Types.Categories;
 
-public class MostHeartedCategory : SlotCategory
+public class MostHeartedCategory : TranslatableSlotCategory
 {
     public override string Name { get; set; } = "Most Hearted";
     public override string Description { get; set; } = "The Most Hearted Content";
+    public override TranslatableString LocalizedName { get; set; } = CategoryStrings.MostHeartedName;
+    public override TranslatableString LocalizedDescription { get; set; } = CategoryStrings.MostHeartedDesc;
     public override string IconHash { get; set; } = "g820607";
     public override string Endpoint { get; set; } = "most_hearted";
     public override string Tag => "most_hearted";

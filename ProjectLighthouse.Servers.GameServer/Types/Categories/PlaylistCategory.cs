@@ -15,13 +15,13 @@ public abstract class PlaylistCategory : Category
 
     public abstract IQueryable<PlaylistEntity> GetItems(DatabaseContext database, GameTokenEntity token);
 
-    public override async Task<GameCategory> Serialize(DatabaseContext database, GameTokenEntity token, SlotQueryBuilder queryBuilder, int numResults = 1)
+    public override async Task<GameCategory> Serialize(DatabaseContext database, GameTokenEntity token, SlotQueryBuilder queryBuilder, string language, int numResults = 1)
     {
         List<ILbpSerializable> playlists =
             (await this.GetItems(database, token).Take(numResults).ToListAsync())
             .ToSerializableList<PlaylistEntity, ILbpSerializable>(GamePlaylist.CreateFromEntity);
 
         int totalPlaylists = await this.GetItems(database, token).CountAsync();
-        return GameCategory.CreateFromEntity(this, new GenericSerializableList(playlists, totalPlaylists, numResults + 1));
+        return GameCategory.CreateFromEntity(this, new GenericSerializableList(playlists, totalPlaylists, numResults + 1), language);
     }
 }

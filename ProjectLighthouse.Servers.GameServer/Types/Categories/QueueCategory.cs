@@ -1,15 +1,19 @@
 #nullable enable
 using LBPUnion.ProjectLighthouse.Database;
 using LBPUnion.ProjectLighthouse.Filter;
+using LBPUnion.ProjectLighthouse.Localization;
+using LBPUnion.ProjectLighthouse.Localization.StringLists;
 using LBPUnion.ProjectLighthouse.Types.Entities.Level;
 using LBPUnion.ProjectLighthouse.Types.Entities.Token;
 
 namespace LBPUnion.ProjectLighthouse.Servers.GameServer.Types.Categories;
 
-public class QueueCategory : SlotCategory
+public class QueueCategory : TranslatableSlotCategory
 {
     public override string Name { get; set; } = "My Queue";
     public override string Description { get; set; } = "Your queued content";
+    public override TranslatableString LocalizedName { get; set; } = CategoryStrings.QueueName;
+    public override TranslatableString LocalizedDescription { get; set; } = CategoryStrings.QueueDesc;
     public override string IconHash { get; set; } = "g820614";
     public override string Endpoint { get; set; } = "queue";
     public override string Tag => "my_queue";
