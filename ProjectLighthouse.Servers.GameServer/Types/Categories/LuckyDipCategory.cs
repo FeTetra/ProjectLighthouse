@@ -13,8 +13,6 @@ namespace LBPUnion.ProjectLighthouse.Servers.GameServer.Types.Categories;
 
 public class LuckyDipCategory : TranslatableSlotCategory
 {
-    public override string Name { get; set; } = "Lucky Dip";
-    public override string Description { get; set; } = "A random selection of content";
     public override TranslatableString LocalizedName { get; set; } = CategoryStrings.LuckyDipName;
     public override TranslatableString LocalizedDescription { get; set; } = CategoryStrings.LuckyDipDesc;
     public override string IconHash { get; set; } = "g820605";

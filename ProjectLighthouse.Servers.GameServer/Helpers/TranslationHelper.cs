@@ -14,7 +14,7 @@ public static class TranslationHelper
         { "da", "da-DK" }, // (Danish)
         { "nl", "nl-NL" }, // (Dutch)
         { "en-gb", "en-GB" }, // (GB English)
-        { "en-us", "en" },    // (US English)
+        { "en-us", "en" }, // (US English)
         { "fi", "fi-FI" }, // (Finnish)
         { "fr", "fr-FR" }, // (French)
         { "de", "de-DE" }, // (German)

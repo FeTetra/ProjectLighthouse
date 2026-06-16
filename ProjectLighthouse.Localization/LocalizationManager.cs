@@ -22,16 +22,25 @@ public static class LocalizationManager
 
         string resourceBasename = $"{namespaceStr}.{translationArea.ToString()}";
 
-        // We don't have an en .resx, so if we aren't using en then we need to add the appropriate language.
-        // Otherwise, keep it to the normal .resx file
-        // e.g. BaseLayout.resx as opposed to BaseLayout.lang-da-DK.resx.
-        if (language != DefaultLang) resourceBasename += $".lang-{language}";
-
         string? localizedString = null;
         try
         {
-            ResourceManager resourceManager = new(resourceBasename,
-                Assembly.GetExecutingAssembly());
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            // We don't have an en .resx, so if we aren't using en then we need to add the appropriate language.
+            // Otherwise, keep it to the normal .resx file
+            // e.g. BaseLayout.resx as opposed to BaseLayout.lang-da-DK.resx.
+            // If a language doesn't exist, try to use the default language instead
+            if (language != DefaultLang)
+            {
+                string localizedResourceName = $"{resourceBasename}.lang-{language}.resources";
+
+                // Check if resource exists
+                if (assembly.GetManifestResourceNames().Contains(localizedResourceName)) 
+                    resourceBasename += $".lang-{language}";
+            }
+
+            ResourceManager resourceManager = new(resourceBasename, assembly);
 
             localizedString = resourceManager.GetString(key);
         }
@@ -40,6 +49,7 @@ public static class LocalizationManager
             // ignored
         }
         
+        // If default language still doesn't exist, use a placeholder
         if (localizedString == null)
         {
             #if DEBUG

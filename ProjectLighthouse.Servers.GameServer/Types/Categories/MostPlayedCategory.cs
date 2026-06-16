@@ -10,8 +10,6 @@ namespace LBPUnion.ProjectLighthouse.Servers.GameServer.Types.Categories;
 
 public class MostPlayedCategory : TranslatableSlotCategory
 {
-    public override string Name { get; set; } = "Most Played";
-    public override string Description { get; set; } = "The most played content";
     public override TranslatableString LocalizedName { get; set; } = CategoryStrings.MostPlayedName;
     public override TranslatableString LocalizedDescription { get; set; } = CategoryStrings.MostPlayedDesc;
     public override string IconHash { get; set; } = "g820608";

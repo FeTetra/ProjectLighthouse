@@ -10,8 +10,6 @@ namespace LBPUnion.ProjectLighthouse.Servers.GameServer.Types.Categories;
 
 public class QueueCategory : TranslatableSlotCategory
 {
-    public override string Name { get; set; } = "My Queue";
-    public override string Description { get; set; } = "Your queued content";
     public override TranslatableString LocalizedName { get; set; } = CategoryStrings.QueueName;
     public override TranslatableString LocalizedDescription { get; set; } = CategoryStrings.QueueDesc;
     public override string IconHash { get; set; } = "g820614";

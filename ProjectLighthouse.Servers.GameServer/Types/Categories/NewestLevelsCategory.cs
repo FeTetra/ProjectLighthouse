@@ -12,8 +12,6 @@ namespace LBPUnion.ProjectLighthouse.Servers.GameServer.Types.Categories;
 
 public class NewestLevelsCategory : TranslatableSlotCategory
 {
-    public override string Name { get; set; } = "Newest Levels";
-    public override string Description { get; set; } = "The most recently published content";
     public override TranslatableString LocalizedName { get; set; } = CategoryStrings.NewestLevelsName;
     public override TranslatableString LocalizedDescription { get; set; } = CategoryStrings.NewestLevelsDesc;
     public override string IconHash { get; set; } = "g820623";

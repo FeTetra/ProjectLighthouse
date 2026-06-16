@@ -57,9 +57,10 @@ public class CategoryController : ControllerBase
         Console.WriteLine($@"Got locale code '{locale}', mapped to '{language}'");
 
         foreach (Category category in CategoryHelper.Categories
-                     .Skip(Math.Max(0, pageData.PageStart - 1))
-                     .Take(Math.Min(pageData.PageSize, pageData.MaxElements))
-                     .ToList())
+            .Where(c => c.Tag != "text") // Exclude text search category
+            .Skip(Math.Max(0, pageData.PageStart - 1))
+            .Take(Math.Min(pageData.PageSize, pageData.MaxElements))
+            .ToList())
         {
             int numResults = results > 0 ? 1 : 0;
             categories.Add(await category.Serialize(this.database, token, queryBuilder, language, numResults));

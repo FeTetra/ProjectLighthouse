@@ -13,8 +13,6 @@ namespace LBPUnion.ProjectLighthouse.Servers.GameServer.Types.Categories;
 
 public class TeamPicksCategory : TranslatableSlotCategory
 {
-    public override string Name { get; set; } = "Team Picks";
-    public override string Description { get; set; } = "Community Team Picks";
 
     public override TranslatableString LocalizedName { get; set; } = CategoryStrings.TeamPicksName;
     public override TranslatableString LocalizedDescription { get; set; } = CategoryStrings.TeamPicksDesc;

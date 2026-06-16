@@ -13,8 +13,6 @@ namespace LBPUnion.ProjectLighthouse.Servers.GameServer.Types.Categories;
 
 public class MostHeartedCategory : TranslatableSlotCategory
 {
-    public override string Name { get; set; } = "Most Hearted";
-    public override string Description { get; set; } = "The Most Hearted Content";
     public override TranslatableString LocalizedName { get; set; } = CategoryStrings.MostHeartedName;
     public override TranslatableString LocalizedDescription { get; set; } = CategoryStrings.MostHeartedDesc;
     public override string IconHash { get; set; } = "g820607";

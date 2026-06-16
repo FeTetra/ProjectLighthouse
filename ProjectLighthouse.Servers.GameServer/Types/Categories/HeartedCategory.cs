@@ -10,8 +10,6 @@ namespace LBPUnion.ProjectLighthouse.Servers.GameServer.Types.Categories;
 
 public class HeartedCategory : TranslatableSlotCategory
 {
-    public override string Name { get; set; } = "My Hearted Content";
-    public override string Description { get; set; } = "Content you've hearted";
     public override TranslatableString LocalizedName { get; set; } = CategoryStrings.HeartedName;
     public override TranslatableString LocalizedDescription { get; set; } = CategoryStrings.HeartedDesc;
     public override string IconHash { get; set; } = "g820611";

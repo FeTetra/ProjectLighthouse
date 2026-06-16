@@ -9,8 +9,8 @@ namespace LBPUnion.ProjectLighthouse.Servers.GameServer.Types.Categories;
 
 public class MyHeartedCreatorsCategory : UserCategory
 {
-    public override string Name { get; set; } = "My Hearted Creators";
-    public override string Description { get; set; } = "Creators you've hearted";
+    public override string Name { get; set; } = ""; // Gotten from localized string
+    public override string Description { get; set; } = ""; // Gotten from localized string
     public TranslatableString LocalizedName { get; set; } = CategoryStrings.MyHeartedCreatorsName;
     public TranslatableString LocalizedDescription { get; set; } = CategoryStrings.MyHeartedCreatorsDesc;
     public override string IconHash { get; set; } = "g820612";

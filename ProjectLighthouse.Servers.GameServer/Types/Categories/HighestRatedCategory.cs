@@ -11,8 +11,6 @@ namespace LBPUnion.ProjectLighthouse.Servers.GameServer.Types.Categories;
 
 public class HighestRatedCategory : TranslatableSlotCategory
 {
-    public override string Name { get; set; } = "Highest Rated";
-    public override string Description { get; set; } = "Community Highest Rated content";
     public override TranslatableString LocalizedName { get; set; } = CategoryStrings.HighestRatedName;
     public override TranslatableString LocalizedDescription { get; set; } = CategoryStrings.HighestRatedDesc;
     public override string IconHash { get; set; } = "g820603";
