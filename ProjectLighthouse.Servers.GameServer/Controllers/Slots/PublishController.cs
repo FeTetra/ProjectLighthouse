@@ -74,7 +74,7 @@ public class PublishController : ControllerBase
             return this.BadRequest();
         }
 
-        if (ServerConfiguration.Instance.UserGeneratedContentLimits.DuplicateSlotUploadingEnabled 
+        if (!ServerConfiguration.Instance.UserGeneratedContentLimits.DuplicateSlotUploadingEnabled 
             && await this.database.Slots.AnyAsync(s => s.RootLevel == slot.RootLevel))
         {
             Logger.Warn("Rejecting level upload, rootlevel is duplicate", LogArea.Publish);
