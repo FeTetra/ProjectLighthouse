@@ -25,5 +25,5 @@ public class UserGeneratedContentLimitConfiguration
 
     public bool BooingEnabled { get; set; } = true;
 
-    public bool DuplicateSlotUploadingEnabled { get; set; } = false;
+    public bool DuplicateSlotUploadingEnabled { get; set; } = true;
 }
