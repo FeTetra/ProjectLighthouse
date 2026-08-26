@@ -30,4 +30,9 @@ public class GameTokenEntity
     public string LocationHash { get; set; }
 
     public DateTime ExpiresAt { get; set; }
+
+    // Patchwork session data
+    public int? PatchworkMajor { get; set; } = 0;
+    public int? PatchworkMinor { get; set; } = 0;
+    public bool? PatchworkJoinKeyEnabled { get; set; } = false;
 }

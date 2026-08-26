@@ -213,12 +213,19 @@ public class LoginController : ControllerBase
             return this.Forbid();
         }
 
-        if (ServerConfiguration.Instance.Authentication.RequirePatchworkUserAgent)
+        bool? hasKey;
+        int? major, minor;
+        bool hasValidPatchworkUserAgent = PatchworkHelper.IsValidPatchworkUserAgent(
+            this.Request.Headers.UserAgent.ToString(), 
+            out major, out minor, out hasKey);
+        token.PatchworkMajor = major;
+        token.PatchworkMinor = minor;
+        token.PatchworkJoinKeyEnabled = hasKey;
+
+        if (ServerConfiguration.Instance.Authentication.RequirePatchworkUserAgent && !hasValidPatchworkUserAgent)
         {
-            if (!PatchworkHelper.IsValidPatchworkUserAgent(this.Request.Headers.UserAgent.ToString()))
-            {
-                return this.Forbid();
-            }
+            Logger.Error($"User {npTicket.Username} tried to login with invalid Patchwork user agent", LogArea.Login);
+            return this.Forbid();
         }
 
         Logger.Success($"Successfully logged in user {user.Username} as {token.GameVersion} client", LogArea.Login);

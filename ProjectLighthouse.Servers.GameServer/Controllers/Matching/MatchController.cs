@@ -46,7 +46,12 @@ public class MatchController : ControllerBase
         await LastContactHelper.SetLastContact(this.database, user, token.GameVersion, token.Platform);
 
         // Do not allow matchmaking if it has been disabled
-        if (!ServerConfiguration.Instance.Matchmaking.MatchmakingEnabled) return this.BadRequest();
+        if (!ServerConfiguration.Instance.Matchmaking.MatchmakingEnabled)
+            if (!ServerConfiguration.Instance.Matchmaking.PatchworkMatchmakingEnabled)
+                return this.BadRequest();
+
+        // Do not allow users with different join keys to match at all
+        if (token.PatchworkJoinKeyEnabled == true) return this.BadRequest();
 
         #region Parse match data
 

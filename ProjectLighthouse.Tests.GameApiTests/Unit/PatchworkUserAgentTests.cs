@@ -11,9 +11,9 @@ public class PatchworkUserAgentTests
     {
         string[] validUserAgents = {
             "PatchworkLBP1 1.0",
-            "PatchworkLBP2 2.0",
-            "PatchworkLBP3 3.0",
-            "PatchworkLBPV 4.0",
+            "PatchworkLBP2 2.0 KEY",
+            "PatchworkLBP3 3.0 NOKEY",
+            "PatchworkLBPV 4.0 KEY",
             "PatchworkLBP1 1.5",
         };
 
@@ -32,12 +32,12 @@ public class PatchworkUserAgentTests
         bool result;
         foreach (string userAgent in validUserAgents)
         {
-            result = PatchworkHelper.IsValidPatchworkUserAgent(userAgent);
+            result = PatchworkHelper.IsValidPatchworkUserAgent(userAgent, out _, out _, out _);
             Assert.True(result, $"Valid user agent: \"{userAgent}\" was evaluated as {result}.");
         }
         foreach (string userAgent in invalidUserAgents)
         {
-            result = PatchworkHelper.IsValidPatchworkUserAgent(userAgent);
+            result = PatchworkHelper.IsValidPatchworkUserAgent(userAgent, out _, out _, out _);
             Assert.False(result, $"Invalid user agent: \"{userAgent}\" was evaluated as {result}.");
         }
     }
