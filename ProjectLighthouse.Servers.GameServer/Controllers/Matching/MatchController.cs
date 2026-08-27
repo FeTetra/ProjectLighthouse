@@ -54,7 +54,7 @@ public class MatchController : ControllerBase
         }
 
         if (ServerConfiguration.Instance.Authentication.RequirePatchworkUserAgent &&
-            token.PatchworkMajor == null || token.PatchworkMinor == null)
+            (token.PatchworkMajor == null || token.PatchworkMinor == null))
         {
             return this.BadRequest();
         }

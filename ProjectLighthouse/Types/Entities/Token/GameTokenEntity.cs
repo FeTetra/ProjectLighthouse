@@ -32,7 +32,7 @@ public class GameTokenEntity
     public DateTime ExpiresAt { get; set; }
 
     // Patchwork session data
-    public int? PatchworkMajor { get; set; } = 0;
-    public int? PatchworkMinor { get; set; } = 0;
-    public bool? PatchworkJoinKeyEnabled { get; set; } = false;
+    public int? PatchworkMajor { get; set; } = null;
+    public int? PatchworkMinor { get; set; } = null;
+    public bool? PatchworkJoinKeyEnabled { get; set; } = null;
 }
