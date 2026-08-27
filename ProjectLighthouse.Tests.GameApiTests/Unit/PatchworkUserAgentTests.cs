@@ -11,9 +11,9 @@ public class PatchworkUserAgentTests
     {
         string[] validUserAgents = {
             "PatchworkLBP1 1.0",
-            "PatchworkLBP2 2.0 KEY",
-            "PatchworkLBP3 3.0 NOKEY",
-            "PatchworkLBPV 4.0 KEY",
+            "PatchworkLBP2 2.0 NK",
+            "PatchworkLBP3 3.0",
+            "PatchworkLBPV 4.0 NK",
             "PatchworkLBP1 1.5",
         };
 
