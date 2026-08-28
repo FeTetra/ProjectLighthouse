@@ -215,7 +215,7 @@ public class LoginController : ControllerBase
 
         bool hasValidPatchworkUserAgent = PatchworkHelper.IsValidPatchworkUserAgent(
             this.Request.Headers.UserAgent.ToString(), 
-            out int? major, out int? minor, out int? hasKey);
+            out int? major, out int? minor, out bool? hasKey);
         token.PatchworkMajor = major;
         token.PatchworkMinor = minor;
         token.PatchworkJoinKeyEnabled = hasKey;
