@@ -213,11 +213,9 @@ public class LoginController : ControllerBase
             return this.Forbid();
         }
 
-        bool? hasKey;
-        int? major, minor;
         bool hasValidPatchworkUserAgent = PatchworkHelper.IsValidPatchworkUserAgent(
             this.Request.Headers.UserAgent.ToString(), 
-            out major, out minor, out hasKey);
+            out int? major, out int? minor, out int? hasKey);
         token.PatchworkMajor = major;
         token.PatchworkMinor = minor;
         token.PatchworkJoinKeyEnabled = hasKey;
