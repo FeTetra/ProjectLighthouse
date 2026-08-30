@@ -74,8 +74,9 @@ public class PublishController : ControllerBase
             return this.BadRequest();
         }
 
+        // Prevent duplicate slot uploads unless the original slot creator is the new creator
         if (!ServerConfiguration.Instance.UserGeneratedContentLimits.DuplicateSlotUploadingEnabled 
-            && await this.database.Slots.AnyAsync(s => s.RootLevel == slot.RootLevel))
+            && await this.database.Slots.AnyAsync(s => s.RootLevel == slot.RootLevel && s.CreatorId != slot.CreatorId))
         {
             Logger.Warn("Rejecting level upload, rootlevel is duplicate", LogArea.Publish);
             await this.database.SendNotification(user.UserId,
